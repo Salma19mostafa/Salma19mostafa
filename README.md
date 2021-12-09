@@ -1,0 +1,4 @@
+- Hi, I’m Salma Mostafa Ali
+- I’m interested in programming
+- I’m currently learning C programming language
+- I want to learn Python programming language
