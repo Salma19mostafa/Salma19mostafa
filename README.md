@@ -2,3 +2,4 @@
 - I’m interested in programming
 - I’m currently learning C programming language
 - I want to learn Python programming language
+- I want to learn C++ AND Arduino C
