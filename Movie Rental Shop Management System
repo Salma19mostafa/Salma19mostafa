@@ -1,0 +1,27 @@
+
+
+class Movie:    def __init__(self, movie_id, title, genre, available_copies):        self.movie_id = movie_id        self.title = title        self.genre = genre      
+
+self.available_copies = available_copies
+    def __str__(self):        return f"ID: {self.movie_id}, Title: {self.title}, Genre: {self.genre}, Available Copies: {self.available_copies}”
+
+class MovieRentalShop:    def __init__(self):        self.movies = {}
+    def add_movie(self, movie):        self.movies[movie.movie_id] = movie        print(f"Movie '{movie.title}' added successfully.")
+
+def display_movies(self):        if not self.movies:            print("No movies available.")        else:            print("Movies available in the shop:")            for movie in self.movies.values():                print(movie)
+
+def update_movie(self, movie_id, title=None, genre=None, available_copies=None):        if movie_id in self.movies:            movie = self.movies[movie_id]            if title:                movie.title = title            if genre:                movie.genre = genre            if available_copies is not None:                movie.available_copies = available_copies            print(f"Movie ID {movie_id} updated successfully.")        else:            print("Movie ID not found.")
+
+def delete_movie(self, movie_id):        if movie_id in self.movies:            del self.movies[movie_id]            print(f"Movie ID {movie_id} deleted successfully.")        else:            print("Movie ID not found.")
+    def rent_movie(self, movie_id):        if movie_id in self.movies:            movie = self.movies[movie_id]            if movie.available_copies > 0:                movie.available_copies -= 1                print(f"Movie '{movie.title}' rented out successfully.")            else:                print(f"Movie '{movie.title}' is out of stock.")        else:            print("Movie ID not found.")
+
+def main():    shop = MovieRentalShop()
+    while True:        print("\n=== Movie Rental Shop Management System ===")        print("1. Add Movie")        print("2. Display Movies")        print("3. Update Movie")        print("4. Delete Movie")        print("5. Rent Movie")        print("6. Exit")
+        choice = input("Enter your choice: ")
+        if choice == '1':            movie_id = input("Enter movie ID: ")            title = input("Enter movie title: ")            genre = input("Enter movie genre: ")            available_copies = int(input("Enter number of available copies: "))            movie = Movie(movie_id, title, genre, available_copies)            shop.add_movie(movie)
+        elif choice == '2':            shop.display_movies()
+        elif choice == '3':            movie_id = input("Enter movie ID to update: ")            title = input("Enter new title (press Enter to skip): ")            genre = input("Enter new genre (press Enter to skip): ")            available_copies = input("Enter new number of available copies (press Enter to skip): ")            available_copies = int(available_copies) if available_copies else None            shop.update_movie(movie_id, title, genre, available_copies)
+        elif choice == '4':            movie_id = input("Enter movie ID to delete: ")            shop.delete_movie(movie_id)
+        elif choice == '5':            movie_id = input("Enter movie ID to rent: ")            shop.rent_movie(movie_id)
+        elif choice == '6':            print("Exiting the system. Goodbye!")            break
+        else:            print("Invalid choice. Please try again.")
