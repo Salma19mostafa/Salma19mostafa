@@ -1,0 +1,17 @@
+
+
+pip install pandas scikit-learn
+
+import pandas as pdfrom sklearn.model_selection import train_test_splitfrom sklearn.ensemble import RandomForestClassifierfrom sklearn.metrics import classification_report, confusion_matrix
+# Load your dataset# Make sure to replace 'credit_card_transactions.csv' with your actual file pathdata = pd.read_csv('credit_card_transactions.csv')
+# Explore the datasetprint(data.head())print(data.info())
+# Assuming your dataset has the following structure:# - 'Amount': the amount of the transaction# - 'Time': timestamp of the transaction# - 'Class': 1 for fraud, 0 for non-fraud# You'll need to modify these according to your dataset.
+# Data Preprocessing# Convert timestamp to numerical features if necessary# Here we drop irrelevant columns and keep only relevant featuresfeatures = data.drop(['Class'], axis=1)labels = data['Class']
+# Splitting the dataset into training and testing setsX_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=0.2, random_state=42)
+# Define and train the modelmodel = RandomForestClassifier(n_estimators=100, random_state=42)model.fit(X_train, y_train)
+# Make predictionsy_pred = model.predict(X_test)
+# Evaluate the modelprint(confusion_matrix(y_test, y_pred))print(classification_report(y_test, y_pred))
+# You can save the model for future use
+
+import joblibjoblib.dump(model, 'fraud_detection_model.pkl')
+# Load the model later using:# model = joblib.load('fraud_detection_model.pkl')
