@@ -1,0 +1,26 @@
+
+
+class Account:
+def **init**(self, account_number, account_holder, balance=0):
+self.account_number = account_number
+self.account_holder = account_holder
+self.balance = balance
+
+class Bank:
+def **init**(self):
+self.accounts = {}
+
+def main():
+bank = Bank()
+
+while True:        print("\nBank Management System")        print("1. Create Account")        print("2. Deposit Money")        print("3. Withdraw Money")        print("4. Check Balance")        print("5. Exit")        choice = input("Enter your choice: ")
+
+if choice == '1':            account_number = input("Enter account number: ")            account_holder = input("Enter account holder name: ")            bank.create_account(account_number, account_holder)
+        elif choice == '2':            account_number = input("Enter account number: ")            account = bank.get_account(account_number)            if account:                amount = float(input("Enter amount to deposit: "))                account.deposit(amount)
+
+elif choice == '3':            account_number = input("Enter account number: ")            account = bank.get_account(account_number)            if account:                amount = float(input("Enter amount to withdraw: "))                account.withdraw(amount)
+        elif choice == '4':            account_number = input("Enter account number: ")            account = bank.get_account(account_number)            if account:                account.check_balance()
+        elif choice == '5':            print("Exiting the system.")   break
+
+else:
+print("Invalid choice. Please try again.")
