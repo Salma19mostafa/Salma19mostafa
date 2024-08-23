@@ -1,0 +1,2 @@
+def main():    Name = input("Enter your name: ")    ID = int(input("Enter your ID: "))    Mark = float(input("Enter the quality test mark: "))
+    if (Mark - 33.0) >= 33.0 or (Mark - 33.0) == 0:        print("\nYou are confirmed as an assistant!")    else:        print("\nYou need to talk to the place owner!")
