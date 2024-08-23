@@ -1,0 +1,6 @@
+def main():
+Name = input("Enter your name: ")
+ID = int(input("Enter your ID: "))
+Preq_Mark = float(input("Enter your prerequisite mark: "))
+
+if Preq_Mark >= 50.0:    print("You are able to take the quality test exam!")else:    print("You are not able to take the quality test exam.")    print("You need to take the prerequisite exam again.")
