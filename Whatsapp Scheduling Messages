@@ -1,0 +1,7 @@
+pip install pywhatkit
+import pywhatkitimport datetime
+# Get the phone number of recipientphone_num = input("Enter phone number (include country code): ")
+# Get the message to be sentmessage = input("Enter the message: ")
+# Get the time to send the messagehour = int(input("Enter the hour to send the message (in 24-hour format): "))minute = int(input("Enter the minute to send the message: "))
+# Schedule the messagepywhatkit.sendwhatmsg(phone_num, message, hour, minute)
+print("Message Scheduled!")
