@@ -1,0 +1,6 @@
+# Initialize the number of elements = int(input("Enter the number of elements: "))
+# Validate the inputwhile n > 100 or n < 1:    print("Error! Number should be in the range of 1 to 100.")    n = int(input("Enter the number again: "))
+# Initialize the list and sumnumbers = []sum = 0.0
+# Input the numbers and calculate the sumfor i in range(n):    num = float(input(f"{i + 1}. Enter number: "))    numbers.append(num)    sum += num
+# Calculate the averageavg = sum / n
+# Print the averageprint(f"Average = {avg:.2f}")
