@@ -1,0 +1,27 @@
+import json
+from datetime import datetime
+
+class Medicine:
+def **init**(self, name, price, quantity):
+[self.name](http://self.name/) = name
+self.price = price
+self.quantity = quantity
+
+def update_quantity(self, quantity):    self.quantity += quantity
+def sell_medicine(self, quantity):    if quantity <= self.quantity:        self.quantity -= quantity        return True    else:        return False
+def __str__(self):    return f"Medicine: {self.name}, Price: {self.price}, Quantity: {self.quantity}”
+
+class Pharmacy:
+def **init**(self):
+self.medicines = {}
+self.sales_history = []
+
+def add_medicine(self, name, price, quantity):    if name in self.medicines:        self.medicines[name].update_quantity(quantity)    else:        self.medicines[name] = Medicine(name, price, quantity)    print(f"Added/Updated Medicine: {name}, Quantity: {quantity}")
+def view_medicines(self):    if not self.medicines:        print("No medicines available.")    else:        for medicine in self.medicines.values():            print(medicine)
+def search_medicine(self, name):    if name in self.medicines:        print(self.medicines[name])    else:        print(f"{name} is not available in the inventory.")
+def remove_medicine(self, name):    if name in self.medicines:        del self.medicines[name]        print(f"{name} has been removed from the inventory.")    else:        print(f"{name} is not available in the inventory.")
+def update_medicine_price(self, name, new_price):    if name in self.medicines:        self.medicines[name].price = new_price        print(f"Price of {name} has been updated to {new_price}.")    else:        print(f"{name} is not available in the inventory.")
+def sell_medicine(self, name, quantity):    if name in self.medicines:        if self.medicines[name].sell_medicine(quantity):            total_price = quantity * self.medicines[name].price            self.sales_history.append({                'medicine': name,                'quantity': quantity,                'total_price': total_price,                'date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')            })            print(f"Sold {quantity} units of {name} for ${total_price:.2f}.")            if self.medicines[name].quantity == 0:                del self.medicines[name]                print(f"{name} is now out of stock and removed from the inventory.")        else:            print(f"Insufficient stock of {name}.")    else:        print(f"{name} is not available in the inventory.")
+def view_sales_history(self):    if not self.sales_history:        print("No sales history available.")    else:        for sale in self.sales_history:            print(f"Medicine: {sale['medicine']}, Quantity: {sale['quantity']}, Total Price: ${sale['total_price']:.2f}, Date: {sale['date']}")
+def save_inventory(self, filename):    with open(filename, 'w') as f:        data = {            'medicines': {name: vars(medicine) for name, medicine in self.medicines.items()},            'sales_history': self.sales_history        }        json.dump(data, f)    print(f"Inventory saved to {filename}.")
+def load_inventory(self, filename):    try:        with open(filename, 'r') as f:            data = json.load(f)            self.medicines = {name: Medicine(**details) for name, details in data['medicines'].items()}            self.sales_history = data['sales_history']        print(f"Inventory loaded from {filename}.")    except FileNotFoundError:        print(f"No inventory file found with name {filename}.")
