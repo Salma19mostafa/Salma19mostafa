@@ -1,0 +1,11 @@
+# Initialize variables
+
+total = 0
+
+counter = 1
+# Loop to get 5 grades from the user
+
+while counter <= 5:    grade = float(input("Enter grade: "))    total += grade    counter += 1
+# Calculate and print the average
+
+average = total / 5print(f"Class average is {average}")
