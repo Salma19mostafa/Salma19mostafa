@@ -1,0 +1,14 @@
+class GymMember:    def __init__(self, name, age, membership_type):        self.name = name        self.age = age        self.membership_type = membership_type
+class Gym:    def __init__(self):        self.members = []
+    def add_member(self, member):        self.members.append(member)        print(f"{member.name} has been added to the gym.")
+    def remove_member(self, name):        for member in self.members:            if member.name == name:                self.members.remove(member)                print(f"{name} has been removed from the gym.")                return        print(f"{name} is not a member of the gym.")
+    def list_members(self):        print("List of gym members:")        for member in self.members:            print(f"Name: {member.name}, Age: {member.age}, Membership Type: {member.membership_type}")
+
+# Main programgym = Gym()
+while True:    print("1. Add Member")    print("2. Remove Member")    print("3. List Members")    print("4. Exit")
+    choice = input("Enter your choice: ")
+    if choice == "1":        name = input("Enter name: ")        age = input("Enter age: ")        membership_type = input("Enter membership type: ")        member = GymMember(name, age, membership_type)        gym.add_member(member)
+    elif choice == "2":        name = input("Enter name of member to remove: ")        gym.remove_member(name)
+    elif choice == "3":        gym.list_members()
+    elif choice == "4":        break
+    else:        print("Invalid choice. Please try again.")
