@@ -1,0 +1,49 @@
+
+
+import json
+
+import os
+class Room:    def __init__(self, room_number, room_type, price_per_night):        self.room_number = room_number        self.room_type = room_type        self.price_per_night = price_per_night        self.is_available = True        self.guest = None
+    def to_dict(self):        return {            'room_number': self.room_number,            'room_type': self.room_type,            'price_per_night': self.price_per_night,            'is_available': self.is_available,            'guest': self.guest.to_dict() if self.guest else None        }
+    @classmethod    def from_dict(cls, data):        room = cls(data['room_number'], data['room_type'], data['price_per_night'])        room.is_available = data['is_available']        room.guest = Guest.from_dict(data['guest']) if data['guest'] else None        return room
+class Guest:    def __init__(self, guest_id, name, contact, reservation=None):        self.guest_id = guest_id        self.name = name        self.contact = contact        self.reservation = reservation
+    def to_dict(self):        return {            'guest_id': self.guest_id,            'name': self.name,            'contact': self.contact,            'reservation': self.reservation        }
+    @classmethod    def from_dict(cls, data):        return cls(data['guest_id'], data['name'], data['contact'], data['reservation'])
+class HotelManagementSystem:    def __init__(self, data_file='hotel_data.json'):        self.rooms = []        self.data_file = data_file        self.load_data()
+    def load_data(self):        if os.path.exists(self.data_file):            with open(self.data_file, 'r') as file:                data = json.load(file)                self.rooms = [Room.from_dict(room) for room in data]
+    def save_data(self):        with open(self.data_file, 'w') as file:            json.dump([room.to_dict() for room in self.rooms], file)
+    def add_room(self, room):        if any(r.room_number == room.room_number for r in self.rooms):            print(f"Error: Room {room.room_number} already exists.")        else:            self.rooms.append(room)            self.save_data()            print(f"Room {room.room_number} added successfully.")
+    def view_rooms(self):        if not self.rooms:            print("No rooms found.")        else:            for room in self.rooms:                status = "Available" if room.is_available else f"Occupied by {room.guest.name}"                print(f"Room {room.room_number} ({room.room_type}) - ${room.price_per_night}/night - {status}")
+    def find_available_rooms(self, room_type=None):        available_rooms = [room for room in self.rooms if room.is_available and (room.room_type == room_type or not room_type)]        if not available_rooms:            print("No available rooms found.")        else:            for room in available_rooms:                print(f"Room {room.room_number} ({room.room_type}) - ${room.price_per_night}/night")
+    def check_in(self, room_number, guest):        for room in self.rooms:            if room.room_number == room_number:                if room.is_available:                    room.guest = guest                    room.is_available = False                    self.save_data()                    print(f"Guest {guest.name} checked into Room {room.room_number}.")                else:                    print(f"Error: Room {room.room_number} is already occupied.")                return        print(f"Error: Room {room_number} not found.")
+    def check_out(self, room_number):        for room in self.rooms:            if room.room_number == room_number:                if not room.is_available:                    print(f"Guest {room.guest.name} checked out from Room {room.room_number}.")                    room.guest = None                    room.is_available = True                    self.save_data()                else:                    print(f"Error: Room {room.room_number} is already available.")                return        print(f"Error: Room {room_number} not found.")
+    def find_guest(self, guest_id):        for room in self.rooms:            if room.guest and room.guest.guest_id == guest_id:                print(f"Guest {room.guest.name} is in Room {room.room_number}.")                return room.guest        print(f"Error: Guest with ID {guest_id} not found.")        return None
+    def make_reservation(self, guest_id, name, contact, room_type):        available_rooms = [room for room in self.rooms if room.is_available and room.room_type == room_type]        if not available_rooms:            print("No available rooms for the selected room type.")            return        guest = Guest(guest_id, name, contact, reservation=available_rooms[0].room_number)        available_rooms[0].guest = guest        available_rooms[0].is_available = False        self.save_data()        print(f"Reservation made for Guest {name} in Room {available_rooms[0].room_number}.")
+    def cancel_reservation(self, guest_id):        guest = self.find_guest(guest_id)        if guest and guest.reservation:            self.check_out(guest.reservation)            print(f"Reservation for Guest {guest.name} has been canceled.")        else:            print("Error: Reservation not found or already checked in.")
+def main():    system = HotelManagementSystem()
+    while True:        print("\nHotel Management System")        print("1. Add Room")        print("2. View Rooms")        print("3. Find Available Rooms")        print("4. Check-In Guest")        print("5. Check-Out Guest")        print("6. Find Guest by ID")        print("7. Make Reservation")        print("8. Cancel Reservation")        print("9. Exit")
+        choice = input("Enter your choice: ")
+        if choice == '1':            room_number = input("Enter room number: ").strip()            if not room_number:                print("Error: Room number cannot be empty.")                continue
+            room_type = input("Enter room type (e.g., Single, Double, Suite): ").strip()            if not room_type:                print("Error: Room type cannot be empty.")                continue
+            try:                price_per_night = float(input("Enter price per night: ").strip())                if price_per_night <= 0:                    raise ValueError("Price must be a positive number.")            except ValueError as e:                print(f"Error: {e}")                continue
+            room = Room(room_number, room_type, price_per_night)            system.add_room(room)
+        elif choice == '2':            system.view_rooms()
+        elif choice == '3':            room_type = input("Enter room type to search for (or leave empty to see all available rooms): ").strip()            system.find_available_rooms(room_type)
+        elif choice == '4':            room_number = input("Enter room number for check-in: ").strip()            if not room_number:                print("Error: Room number cannot be empty.")                continue
+            guest_id = input("Enter guest ID: ").strip()            if not guest_id:                print("Error: Guest ID cannot be empty.")                continue
+            name = input("Enter guest name: ").strip()            if not name:                print("Error: Guest name cannot be empty.")                continue
+            contact = input("Enter guest contact number: ").strip()            if not contact:                print("Error: Contact number cannot be empty.")                continue
+            guest = Guest(guest_id, name, contact)            system.check_in(room_number, guest)
+        elif choice == '5':            room_number = input("Enter room number for check-out: ").strip()            if not room_number:                print("Error: Room number cannot be empty.")                continue
+            system.check_out(room_number)
+        elif choice == '6':            guest_id = input("Enter guest ID to search: ").strip()            if not guest_id:                print("Error: Guest ID cannot be empty.")                continue
+            system.find_guest(guest_id)
+        elif choice == '7':            guest_id = input("Enter guest ID: ").strip()            if not guest_id:                print("Error: Guest ID cannot be empty.")                continue
+            name = input("Enter guest name: ").strip()            if not name:                print("Error: Guest name cannot be empty.")                continue
+            contact = input("Enter guest contact number: ").strip()            if not contact:                print("Error: Contact number cannot be empty.")                continue
+            room_type = input("Enter room type for reservation: ").strip()            if not room_type:                print("Error: Room type cannot be empty.")                continue
+            system.make_reservation(guest_id, name, contact, room_type)
+        elif choice == '8':            guest_id = input("Enter guest ID to cancel reservation: ").strip()            if not guest_id:                print("Error: Guest ID cannot be empty.")                continue
+            system.cancel_reservation(guest_id)
+        elif choice == '9':            print("Exiting the system.")            break
+        else:            print("Invalid choice. Please try again
