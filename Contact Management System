@@ -1,0 +1,16 @@
+class Contact:    def __init__(self, name, phone_number, email):        self.name = name        self.phone_number = phone_number        self.email = email
+    def display_contact(self):        print("Name: ", self.name)        print("Phone Number: ", self.phone_number)        print("Email: ", self.email)
+
+class ContactManager:    def __init__(self):        self.contacts = []
+    def add_contact(self, contact):        self.contacts.append(contact)
+    def display_contacts(self):        for index, contact in enumerate(self.contacts, start=1):            print("Contact", index)            contact.display_contact()
+    def search_contact(self, name):        for contact in self.contacts:            if contact.name == name:                contact.display_contact()                return        print("Contact with name {} not found".format(name))
+    def edit_contact(self, name, new_name, new_phone_number, new_email):        for contact in self.contacts:            if contact.name == name:                contact.name = new_name                contact.phone_number = new_phone_number                contact.email = new_email                print("Contact {} updated successfully.".format(new_name))                return        print("Contact with name {} not found".format(name))
+    def delete_contact(self, name):        for contact in self.contacts:            if contact.name == name:                self.contacts.remove(contact)                print("Contact {} deleted successfully.".format(name))                return        print("Contact with name {} not found".format(name))
+
+# Creating contactscontact1 = Contact("Alice", "1234567890", "alice@example.com")contact2 = Contact("Bob", "9876543210", "bob@example.com")
+# Creating a contact manager and adding contactscontact_manager = ContactManager()contact_manager.add_contact(contact1)contact_manager.add_contact(contact2)
+# Displaying all contactsprint("All Contacts:")contact_manager.display_contacts()
+# Searching for a contactprint("\nSearching for a contact:")contact_manager.search_contact("Alice")
+# Deleting a contactprint("\nDeleting contact 'Bob':")contact_manager.delete_contact("Bob")
+# Displaying all contacts after deletingprint("\nAll Contacts After Deleting:")contact_manager.display_contacts()
