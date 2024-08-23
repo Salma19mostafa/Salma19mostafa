@@ -1,0 +1,16 @@
+pip install requests
+import requests
+
+import json
+
+import datetime
+# Set API Access Token and Recipient User IDACCESS_TOKEN = "<YOUR_ACCESS_TOKEN>"USER_ID = "<RECIPIENT_USER_ID>"
+def schedule_message(message, scheduled_time):    url = "https://graph.facebook.com/v13.0/me/messages"
+    data = {        "recipient": {"id": USER_ID},        "message": {"text": message},        "messaging_type": "MESSAGE_TAG",        "tag": "NON_PROMOTIONAL_SUBSCRIPTION",        "access_token": ACCESS_TOKEN,        "schedule_time": scheduled_time    }
+    response = requests.post(url, json=data)
+    if response.status_code == 200:        print("Message scheduled successfully for: ", scheduled_time)    else:        print("Error scheduling message:", response.text)
+# Input message and scheduled timemessage = input("Enter message to schedule: ")date_input = input("Enter date (yyyy-mm-dd): ")time_input = input("Enter time (HH:MM:ss): ")
+scheduled_time = datetime.datetime.strptime(f"{date_input} {time_input}", "%Y-%m-%d %H:%M:%S").timestamp()
+schedule_message(message, scheduled_time)
+
+Make sure to replace `<YOUR_ACCESS_TOKEN>` and `<RECIPIENT_USER_ID>` with your respective Messenger API access token and recipient user ID. You can use the code to schedule messages to be sent to the user at the specified date and time.
