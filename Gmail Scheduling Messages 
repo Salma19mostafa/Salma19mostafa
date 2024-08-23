@@ -1,0 +1,10 @@
+import smtplib from email.mime.multipart
+
+ import MIMEMultipart from email.mime.text
+
+ import MIMEText
+
+import datetime
+def send_email(subject, message, to_email, schedule_time):    from_email = "your_email@gmail.com"    password = "your_password"        msg = MIMEMultipart()    msg['From'] = from_email    msg['To'] = to_email    msg['Subject'] = subject        msg.attach(MIMEText(message, 'plain'))        server = smtplib.SMTP('smtp.gmail.com', 587)    server.starttls()    server.login(from_email, password)        now = datetime.datetime.now()    schedule_datetime = datetime.datetime.strptime(schedule_time, '%Y-%m-%d %H:%M')        while now < schedule_datetime:        now = datetime.datetime.now()        server.sendmail(from_email, to_email, msg.as_string())    server.quit()        print("Email scheduled successfully!")
+subject = "Test Email"message = "This is a scheduled email message."to_email = "recipient_email@gmail.com"schedule_time = "2022-12-31 10:00"
+send_email(subject, message, to_email, schedule_time)
