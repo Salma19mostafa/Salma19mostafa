@@ -1,0 +1,23 @@
+class Student:    def __init__(self, student_id, name, age, major):        self.student_id = student_id        self.name = name        self.age = age        self.major = major        self.enrolled_courses = {}
+    def enroll(self, course, grade=None):        self.enrolled_courses[course.course_id] = {"course": course, "grade": grade}
+    def display_student_info(self):        print(f"Student ID: {self.student_id}")        print(f"Name: {self.name}")        print(f"Age: {self.age}")        print(f"Major: {self.major}")        print("Enrolled Courses:")        for course_info in self.enrolled_courses.values():            course_info["course"].display_course_info()            print(f"Grade: {course_info['grade'] if course_info['grade'] else 'Not assigned'}")        print("----------")
+class Course:    def __init__(self, course_id, course_name, instructor, credits):        self.course_id = course_id        self.course_name = course_name        self.instructor = instructor        self.credits = credits
+    def display_course_info(self):        print(f"Course ID: {self.course_id}")        print(f"Course Name: {self.course_name}")        print(f"Instructor: {self.instructor}")        print(f"Credits: {self.credits}")
+class Faculty:    def __init__(self, faculty_id, name, department):        self.faculty_id = faculty_id        self.name = name        self.department = department
+    def display_faculty_info(self):        print(f"Faculty ID: {self.faculty_id}")        print(f"Name: {self.name}")        print(f"Department: {self.department}")
+class College:    def __init__(self):        self.students = {}        self.courses = {}        self.faculty = {}
+    def add_student(self, student):        self.students[student.student_id] = student
+    def add_course(self, course):        self.courses[course.course_id] = course
+    def add_faculty(self, faculty):        self.faculty[faculty.faculty_id] = faculty
+    def enroll_student(self, student_id, course_id):        if student_id in self.students and course_id in self.courses:            student = self.students[student_id]            course = self.courses[course_id]            student.enroll(course)        else:            print("Student or Course not found.")
+    def assign_grade(self, student_id, course_id, grade):        if student_id in self.students and course_id in self.courses:            student = self.students[student_id]            if course_id in student.enrolled_courses:                student.enrolled_courses[course_id]["grade"] = grade            else:                print("Student is not enrolled in this course.")        else:            print("Student or Course not found.")
+    def display_students(self):        if not self.students:            print("No students enrolled yet.")        else:            for student in self.students.values():                student.display_student_info()
+    def display_courses(self):        if not self.courses:            print("No courses available yet.")        else:            for course in self.courses.values():                course.display_course_info()
+    def display_faculty(self):        if not self.faculty:            print("No faculty members added yet.")        else:            for faculty in self.faculty.values():                faculty.display_faculty_info()
+# Example Usagecollege = College()
+# Add studentsstudent1 = Student(student_id=1, name="Alice", age=20, major="Computer Science")student2 = Student(student_id=2, name="Bob", age=22, major="Electrical Engineering")college.add_student(student1)college.add_student(student2)
+# Add coursescourse1 = Course(course_id=101, course_name="Data Structures", instructor="Dr. Smith", credits=4)course2 = Course(course_id=102, course_name="Calculus", instructor="Dr. Johnson", credits=3)college.add_course(course1)college.add_course(course2)
+# Add facultyfaculty1 = Faculty(faculty_id=201, name="Dr. Smith", department="Computer Science")faculty2 = Faculty(faculty_id=202, name="Dr. Johnson", department="Mathematics")college.add_faculty(faculty1)college.add_faculty(faculty2)
+# Enroll studentscollege.enroll_student(student_id=1, course_id=101)college.enroll_student(student_id=2, course_id=102)
+# Assign gradescollege.assign_grade(student_id=1, course_id=101, grade="A")college.assign_grade(student_id=2, course_id=102, grade="B")
+# Display informationcollege.display_students()college.display_courses()college.display_faculty()
