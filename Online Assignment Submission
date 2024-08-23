@@ -1,0 +1,23 @@
+
+
+pip install Flask
+from flask import Flask, request, redirect, url_for, render_templateimport os
+app = Flask(__name__)
+# Set the upload folder and allowed extensionsUPLOAD_FOLDER = 'uploads/'ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'txt'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# Ensure the upload folder existsif not os.path.exists(UPLOAD_FOLDER):    os.makedirs(UPLOAD_FOLDER)
+def allowed_file(filename):    """Check if the file is allowed."""    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+@app.route('/')def index():    """Render the upload form."""    return render_template('upload.html')
+@app.route('/submit', methods=['POST'])def submit():    """Handle the file upload."""    if 'file' not in request.files:        return 'No file part'        file = request.files['file']        if file.filename == '':        return 'No selected file'        if file and allowed_file(file.filename):        filename = file.filename        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))        return 'File successfully uploaded'        return 'File type not allowed'
+
+ app.run(debug=True)```
+### HTML Template (upload.html)
+You also need a simple HTML form for file upload. Create a folder named `templates` in the same directory where your Python script resides, and inside that folder, create a file named `upload.html`:
+```html<!doctype html><html lang="en"><head>    <meta charset="utf-8">    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    <title>Online Assignment Submission</title></head><body>    <h1>Upload Assignment</h1>    <form action="{{ url_for('submit') }}" method="post" enctype="multipart/form-data">        <input type="file" name="file" required>        <input type="submit" value="Submit">    </form></body></html>```
+
+### Running the Application
+1. Save the Python code in a file named `app.py`.2. Make sure you have the `templates` directory with `upload.html` as described above.3. Run the application with the following command:
+```bashpython app.py```
+4. Open your web browser and go to `http://127.0.0.1:5000/` to see the upload form.
+### Note
+- The application will handle `.pdf`, `.doc`, `.docx`, and `.txt` file types. You can modify `ALLOWED_EXTENSIONS` to include other file types as needed.- Uploaded files will be saved in the `uploads` directory.
