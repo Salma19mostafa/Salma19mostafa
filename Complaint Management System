@@ -1,0 +1,9 @@
+
+
+complaints = {}
+def add_complaint(complaint_id, complaint_text):    complaints[complaint_id] = complaint_text    print("Complaint added successfully.")
+def view_complaint(complaint_id):    if complaint_id in complaints:        print(f"Complaint ID: {complaint_id}\nComplaint Text: {complaints[complaint_id]}")    else:        print("Complaint not found.")
+def delete_complaint(complaint_id):    if complaint_id in complaints:        del complaints[complaint_id]        print("Complaint deleted successfully.")    else:        print("Complaint not found.")
+while True:    print("\nComplaint Management System\n")    print("1. Add Complaint")    print("2. View Complaint")    print("3. Delete Complaint")    print("4. Exit\n")
+    choice = int(input("Enter your choice: "))
+    if choice == 1:        complaint_id = input("Enter complaint ID: ")        complaint_text = input("Enter complaint text: ")        add_complaint(complaint_id, complaint_text)    elif choice == 2:        complaint_id = input("Enter complaint ID: ")        view_complaint(complaint_id)    elif choice == 3:        complaint_id = input("Enter complaint ID: ")        delete_complaint(complaint_id)    elif choice == 4:        break    else:        print("Invalid choice. Please try again.")
