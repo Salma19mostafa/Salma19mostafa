@@ -1,0 +1,2 @@
+def main():    Name = input("Enter your name: ")    ID = int(input("Enter your ID: "))    History = int(input("Enter History: "))    Personal_Interaction = int(input("Enter Personal Interaction: "))
+    if History == 1 and Personal_Interaction == 1:        print("CV is Approved!")    else:        print("CV is Rejected!")
