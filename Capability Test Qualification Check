@@ -1,0 +1,2 @@
+mark = int(input("Enter the employee's mark: "))
+if mark >= 50:    print("You are qualified for the capability test!")else:    print("You are not qualified for the capability test!")    print("You have to take this exam again!")
