@@ -1,0 +1,6 @@
+name = input("Enter your name: ")
+m1 = float(input("Enter the marks of theo_part: "))
+m2 = float(input("Enter the marks of oral_part: "))
+m3 = float(input("Enter the marks of pract_part: "))
+total = m1 + m2 + m3
+print("The total mark is {:.2f}".format(total))
