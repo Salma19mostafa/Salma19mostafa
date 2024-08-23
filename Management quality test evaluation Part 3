@@ -1,0 +1,6 @@
+def main():   
+
+ Name = input("Enter your name: ")   
+
+ ID = int(input("Enter your ID: "))    Mark = float(input("Enter the quality test mark: "))
+    if (Mark - 34.0) >= 34.0 or (Mark - 34.0) == 0:        print("\nYou are confirmed as an administrator!")    else:        print("\nYou need to talk to the place owner!")
