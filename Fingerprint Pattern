@@ -1,0 +1,2 @@
+def generate_fingerprint_pattern(size):    for i in range(size):        if i < size // 3:            print(" " * (size - i) + "*" * (i * 2) + " " * (size - i))        elif i < size // 2:            print(" " * (size - i) + "*" * (size - i) + " " * (i * 2) + "*" * (size - i) + " " * (size - i))        elif i < size * 2 // 3:            print(" " * (size * 2 // 3) + "*" * (size // 3) + " " * (size // 3 * 4) + "*" * (size // 3))        else:            print(" " * (size // 3 * 2) + "*" * size + " " * (size // 3))
+size = generate_fingerprint_pattern(size)
