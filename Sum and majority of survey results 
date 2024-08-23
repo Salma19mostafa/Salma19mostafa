@@ -1,0 +1,4 @@
+def main():    num_of_results = int(input("Enter number of results\n"))
+    arr = []    print("Enter Result number 1")    arr.append(int(input()))        largest = arr[0]    sum_of_results = arr[0]
+    for i in range(1, num_of_results):        print(f"Enter Result number {i + 1}")        result = int(input())        arr.append(result)        if result > largest:            largest = result        sum_of_results += result
+    print(f"Total Results is : {sum_of_results}")    print(f"Largest result is : {largest}")
