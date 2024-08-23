@@ -1,0 +1,22 @@
+def main():    print("|*---------------------------MENU-----------------------------*|")    print()    print("(1)  Chicken Biryani                    $2 only.")    print("(2)  Chicken Palao                      $1.5 only.")    print("(3)  Chinese Rice                       $2.5 only.")    print("(4)  Chicken Burger                     $1 only.")    print("(5)  Nawabi Pizza                       $4.5 only.")    print("(6)  2.5 Litre Coke                     $1.75 only.")    print()
+    order = int(input("Please select the order number: "))    no_deals = int(input("Please enter the number of deals: "))    print()
+    if order == 1:        print("Order : Chicken Biryani.")        price = 2    elif order == 2:        print("Order : Chicken Palao.")        price = 1.5    elif order == 3:      
+
+  print("Order : Chinese Rice.")        price = 2.5    elif order == 4:       
+
+ print("Order : Chicken Burger.")        price = 1    elif order == 5:       
+
+ print("Order : Nawabi Pizza.")        price = 4.5    elif order == 6:       
+
+ print("Order : 2.5 Litre Coke.")        price = 1.75    else:        
+
+print("Invalid order number.")        return
+    print(f"Number of deals : {no_deals}")   
+
+ print(f"Price of each deal: ${price} only.")   
+
+ print(f"Total price : ${price * no_deals} only.")  
+
+ print()  
+
+  print("~---------THANK YOU FOR COMING-----------~")
