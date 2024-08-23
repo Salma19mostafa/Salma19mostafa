@@ -1,0 +1,31 @@
+amount = 1000transaction = 'y'k = 0
+while True:    pin = int(input("ENTER YOUR SECRET PIN NUMBER: "))    if pin == -1:        break    else:        print("PLEASE ENTER VALID PASSWORD\n")
+while not k:    print("******** Welcome to ATM Service **************")    print("1. Check Balance")    print("2. Withdraw Cash")    print("3. Deposit Cash")    print("4. Quit")    print("***********************************************\n")
+    choice = int(input("Enter your choice: "))
+    if choice == 1:        print(f"\nYOUR BALANCE IN Rs: {amount}")    elif choice == 2:        withdraw = int(input("\nENTER THE AMOUNT TO WITHDRAW: "))        if withdraw % 100 != 0:            print("\nPLEASE ENTER THE AMOUNT IN MULTIPLES OF 100")        elif withdraw > (amount - 500):            print("\nINSUFFICIENT BALANCE")        else:            amount -= withdraw            print("\n\nPLEASE COLLECT CASH")            print(f"YOUR CURRENT BALANCE IS {amount}")    elif choice == 3:        deposit = int(input("\nENTER THE AMOUNT TO DEPOSIT: "))        amount += deposit        print(f"YOUR BALANCE IS {amount}")    elif choice == 4:        print("\nTHANK YOU FOR USING ATM")        break    else:        print("\nINVALID CHOICE")
+    transaction = input("\n\n\nDO YOU WISH TO HAVE ANOTHER TRANSACTION? (y/n): ")    if transaction.lower() == 'n':        k =
+
+amount = 1000
+transaction = 'y'
+k = 0
+
+while True:
+pin = int(input("ENTER YOUR SECRET PIN NUMBER: "))
+if pin == -1:
+break
+else:
+print("PLEASE ENTER VALID PASSWORD\n")
+
+while not k:
+print("******** Welcome to ATM Service **")
+print("1. Check Balance")
+print("2. Withdraw Cash")
+print("3. Deposit Cash")
+print("4. Quit")
+print("***********************************\n")
+
+choice = int(input("Enter your choice: "))
+if choice == 1:    print(f"\\nYOUR BALANCE IN Rs: {amount}")elif choice == 2:    withdraw = int(input("\\nENTER THE AMOUNT TO WITHDRAW: "))    if withdraw % 100 != 0:        print("\\nPLEASE ENTER THE AMOUNT IN MULTIPLES OF 100")    elif withdraw > (amount - 500):        print("\\nINSUFFICIENT BALANCE")    else:        amount -= withdraw        print("\\n\\nPLEASE COLLECT CASH")        print(f"YOUR CURRENT BALANCE IS {amount}")elif choice == 3:    deposit = int(input("\\nENTER THE AMOUNT TO DEPOSIT: "))    amount += deposit    print(f"YOUR BALANCE IS {amount}")elif choice == 4:    print("\\nTHANK YOU FOR USING ATM")    breakelse:    print("\\nINVALID CHOICE")
+transaction = input("\\n\\n\\nDO YOU WISH TO HAVE ANOTHER TRANSACTION? (y/n): ")if transaction.lower() == 'n':    k = 1
+
+print("\n\nTHANKS FOR USING OUR ATM SERVICE")
