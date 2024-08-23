@@ -1,0 +1,1 @@
+def main():    Name = input("Enter your name: ")    ID = int(input("Enter your ID: "))    Mark = float(input("Enter the quality test mark: "))        X = Mark - 34.0        if X >= 34.0:        print("You are verified as an administrator!")    else:        print("You are not verified as an administrator!")        print("\nWait for another check!")
