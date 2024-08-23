@@ -1,0 +1,6 @@
+def main():    arr1 = []
+    print("\\nSort marks in array in descending order:\\n")
+    n = int(input("Input the size of array: "))
+    print(f"Input {n} marks in the array:")    for i in range(n):        mark = float(input(f"marks - {i}: "))        arr1.append(mark)
+    arr1.sort(reverse=True)
+    print("\\nMarks in array sorted in descending order:")  for mark in arr1:        print(f"{mark}")
