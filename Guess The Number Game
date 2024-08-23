@@ -1,0 +1,2 @@
+import random
+def main():    secret_number = random.randint(0, 9)    print("I have a number in my mind (0 - 9). Can you guess it?\n")        while True:        guess = int(input("Enter your guess: "))        if secret_number == guess:            print("You are right!")            break        elif secret_number > guess:            print(f"My number is greater than {guess}. Try Again\n")        else:            print(f"My number is smaller than {guess}. Try Again\n")
