@@ -1,5 +1,7 @@
-- Hi, I’m Salma Mostafa Ali
+- Hi, I’m Salma Mostafa Ali Ahmed Tolba
 - I’m interested in programming
 - I’m currently learning C programming language
 - I want to learn Python programming language
 - I want to learn C++ and Arduino C
+- I want to be a Web Developer
+- I am currently learning (through projects) to  use the Scratch 3.0 program 
