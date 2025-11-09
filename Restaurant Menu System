@@ -1,22 +1,91 @@
-def main():    print("|*---------------------------MENU-----------------------------*|")    print()    print("(1)  Chicken Biryani                    $2 only.")    print("(2)  Chicken Palao                      $1.5 only.")    print("(3)  Chinese Rice                       $2.5 only.")    print("(4)  Chicken Burger                     $1 only.")    print("(5)  Nawabi Pizza                       $4.5 only.")    print("(6)  2.5 Litre Coke                     $1.75 only.")    print()
-    order = int(input("Please select the order number: "))    no_deals = int(input("Please enter the number of deals: "))    print()
-    if order == 1:        print("Order : Chicken Biryani.")        price = 2    elif order == 2:        print("Order : Chicken Palao.")        price = 1.5    elif order == 3:      
+import datetime
+import random
 
-  print("Order : Chinese Rice.")        price = 2.5    elif order == 4:       
+def main():
+    total_bill = 0  # running total for all orders
+    receipt = []    # list to store each order for summary
 
- print("Order : Chicken Burger.")        price = 1    elif order == 5:       
+    # Ask for customer name at the start
+    customer_name = input("Please enter your name: ")
 
- print("Order : Nawabi Pizza.")        price = 4.5    elif order == 6:       
+    # Generate a unique order ID (e.g., INV1234)
+    order_id = f"INV{random.randint(1000, 9999)}"
 
- print("Order : 2.5 Litre Coke.")        price = 1.75    else:        
+    while True:
+        print("|*---------------------------MENU-----------------------------*|")
+        print()
+        print("(1)  Chicken Biryani                    $2 only.")
+        print("(2)  Chicken Palao                      $1.5 only.")
+        print("(3)  Chinese Rice                       $2.5 only.")
+        print("(4)  Chicken Burger                     $1 only.")
+        print("(5)  Nawabi Pizza                       $4.5 only.")
+        print("(6)  2.5 Litre Coke                     $1.75 only.")
+        print("(0)  Exit")
+        print()
 
-print("Invalid order number.")        return
-    print(f"Number of deals : {no_deals}")   
+        try:
+            order = int(input("Please select the order number: "))
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            continue
 
- print(f"Price of each deal: ${price} only.")   
+        if order == 0:
+            # Add date & time stamp
+            now = datetime.datetime.now()
+            print("\n~---------FINAL RECEIPT-----------~")
+            print(f"Customer: {customer_name}")
+            print(f"Order ID: {order_id}")
+            print(f"Date: {now.strftime('%Y-%m-%d')}   Time: {now.strftime('%H:%M:%S')}")
+            print("-" * 40)
+            print(f"{'Item':<20}{'Qty':<10}{'Total ($)':<10}")
+            print("-" * 40)
+            for item in receipt:
+                print(f"{item['name']:<20}{item['quantity']:<10}{item['total']:<10.2f}")
+            print("-" * 40)
+            print(f"{'Grand Total':<20}{'':<10}{total_bill:<10.2f}")
+            print("~---------THANK YOU FOR COMING-----------~")
+            break
 
- print(f"Total price : ${price * no_deals} only.")  
+        try:
+            no_deals = int(input("Please enter the number of deals: "))
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            continue
 
- print()  
+        print()
 
-  print("~---------THANK YOU FOR COMING-----------~")
+        if order == 1:
+            name, price = "Chicken Biryani", 2
+        elif order == 2:
+            name, price = "Chicken Palao", 1.5
+        elif order == 3:
+            name, price = "Chinese Rice", 2.5
+        elif order == 4:
+            name, price = "Chicken Burger", 1
+        elif order == 5:
+            name, price = "Nawabi Pizza", 4.5
+        elif order == 6:
+            name, price = "2.5 Litre Coke", 1.75
+        else:
+            print("Invalid order number.")
+            continue
+
+        order_total = price * no_deals
+        total_bill += order_total
+
+        # Save order details in receipt
+        receipt.append({
+            "name": name,
+            "quantity": no_deals,
+            "total": order_total
+        })
+
+        print(f"Order : {name}")
+        print(f"Number of deals : {no_deals}")
+        print(f"Price of each deal: ${price} only.")
+        print(f"Total price for this order : ${order_total} only.")
+        print(f"Running total bill : ${total_bill} only.\n")
+
+# Run the program
+if __name__ == "__main__":
+    main()
