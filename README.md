@@ -5,3 +5,4 @@
 - I want to learn C++ and Arduino C
 - I want to be a Web Developer
 - I am currently learning (through projects) to  use the Scratch 3.0 program 
+- I announce that I sell my codes on https://sellanycode.com
