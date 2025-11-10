@@ -6,3 +6,4 @@
 - I want to be a Web Developer
 - I am currently learning (through projects) to  use the Scratch 3.0 program 
 - I announce that I sell my codes on https://payhip.com/SalmasCodes22
+- I share the link(s) to my code(s) on https://substack.com/@salmamostafaali?utm_campaign=profile&utm_medium=profile-page
